@@ -31,12 +31,15 @@ namespace DatingApp.API.Controllers
             //validate request
 
             userForRegisterDto.UserName = userForRegisterDto.UserName.ToLower();
+
             if (await _repo.UserExists(userForRegisterDto.UserName))
                 return BadRequest("Username already exist");
+
             var userToCreate = new User
             {
                 UserName = userForRegisterDto.UserName
             };
+
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
             return StatusCode(201);
         }
@@ -49,7 +52,8 @@ namespace DatingApp.API.Controllers
             if (userFromRepo == null)
                 return Unauthorized();
 
-            var claims = new[]{
+            var claims = new[]
+            {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Name, userFromRepo.UserName)
             };
