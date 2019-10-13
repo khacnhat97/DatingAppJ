@@ -11,11 +11,11 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/messages']">Messages</a>
       </li>
-      
+
     </ul>
 
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
-      <img src="{{photoUrl}}" alt="">
+      <img src="{{photoUrl || '../../../assets/user.png'}}" alt="">
       <a class="dropdown-toggle text-light" dropdownToggle>
         Welcome {{authService.decodedToken?.unique_name}}
       </a>
